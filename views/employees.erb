@@ -18,10 +18,8 @@
     <![endif]-->
   </head>
   <body>
-
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -29,68 +27,62 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">TIY Database</a>
+          <a class="navbar-brand" href="/">The Iron Yard</a>
         </div>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/employees">Employees</a></li>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employees <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/employees">Employees</a></li>
+                <li><a href="/new">Add an employee</a></li>
+              </ul>
+            </li>
           </ul>
+          <form action="/search" method="get" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="search" name="search" class="form-control" placeholder="Search">
+              <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </form>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
-
     <div class="container">
-      <div class="panel panel-default">
-        <!-- Default panel contents -->
+      <div class="panel panel-title">
         <div class="panel-heading">List of Iron Yard Employees</div>
-        <div class="panel-body text-center">
-          <p><a href="/new_employee"><button type="button" class="btn btn-primary">Add a new employee </button></a></p>
-        </div>
-
-        <!-- Table -->
-      <div class="container">
-  			<div class="panel panel-default">
-  				<div class="panel-heading">
-  					Employees
-  				</div>
-    				<table class="table">
-    					<tr>
-    						<th class="info">Name</th>
-    						<th class="info">Address</th>
-    						<th class="info">Phone</th>
-    					</tr>
-    					<tr>
-    						<td rowspan="5"><a href="/employee?name=<%= person["name"] %>"><%= person["name"] %></a></td>
-    						<td><%= @person["address"] %></td>
-    						<td><%= @person["phone"] %></td>
-    					</tr>
-    					<tr>
-    						<th class="info">Position</th>
-    						<th class="info">Salary</th>
-    					</tr>
-    					<tr>
-    						<td><%= @person["position"] %></td>
-    						<td>$<%= @person["salary"] %></td>
-    					</tr>
-    					<tr>
-    						<th class="info">Slack</th>
-    						<th class="info">Github</th>
-    					</tr>
-    					<tr>
-    						<td><%= @person["slack"] %></td>
-    						<td><%= @person["github"] %></td>
-    					</tr>
-    				</table>
-  			</div>
+        <table class="table table-striped">
+          <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Github account</th>
+            <th>Slack account</th>
+          </thead>
+          <tbody>
+            <% @employees.each do |employee| %>
+            <tr>
+              <td><%= employee.id %></td>
+              <td><a href="/employee_page?id=<%= employee.id %>"><%= employee.name %></td>
+              <td><%= employee.phone %></td>
+              <td><%= employee.address %></td>
+              <td><%= employee.position %></td>
+              <td><%= employee.salary %></td>
+              <td><%= employee.github %></td>
+              <td><%= employee.slack %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="well-lg text-center">
+        <a class="btn btn-primary btn-lg" href="/new" role="button">Add Employee</a>
       </div>
     </div>
-  </div>
-
-
-
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
