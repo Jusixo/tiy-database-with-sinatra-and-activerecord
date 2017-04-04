@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">TIY Database</a>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<!-- <li class="active"><a href="/employees">Employees <span class="sr-only">(current)</span></a></li>
+            <li><a href="/new_employee">Add an Employee</a></li> -->
+						<li class="active dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employees<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/employees">Employee Report</a></li>
+								<li><a href="/new_employee">Add an Employee</a></li>
+								<li><a href="/search_employee">Search for Employee</a></li>
+								<li><a href="/search_employee">Update Employee</a></li>
+								<li><a href="/search_employee">Delete an Employee</a></li>
+							</ul>
+						</li>
+            <li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/courses">Course Report</a></li>
+								<li><a href="/new_course">Add a Course</a></li>
+								<li><a href="/search_course">Search for a Course</a></li>
+								<li><a href="/search_course">Update a Course</a></li>
+								<li><a href="/search_course">Delete a Course</a></li>
+							</ul>
+						</li>
+					</ul>
+				<form action="/search_results" method="get" class="navbar-form navbar-right form-inline">
+						<div class="form-group">
+							<label class="sr-only" for="search">Search</label>
+							<div class="input-group">
+								<div class="input-group-addon">Search</div>
+								<input type="text" name="search_param" class="form-control" id="search_param" placeholder="Name, Slack, GitHub">
+							</div>
+						</div>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				</form>
+      </div><!-- /.navbar-collapse -->
+    	</div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					Employees
+				</div>
+				<table class="table">
+					<tr>
+						<th class="info">Name</th>
+						<th class="info">Address</th>
+						<th class="info">Phone</th>
+					</tr>
+					<tr>
+						<td rowspan="5"><a href="/employee?name=<%= person["name"] %>"><%= person["name"] %></a></td>
+						<td><%= @person["address"] %></td>
+						<td><%= @person["phone"] %></td>
+					</tr>
+					<tr>
+						<th class="info">Position</th>
+						<th class="info">Salary</th>
+					</tr>
+					<tr>
+						<td><%= @person["position"] %></td>
+						<td>$<%= @person["salary"] %></td>
+					</tr>
+					<tr>
+						<th class="info">Slack Account</th>
+						<th class="info">Github Account</th>
+					</tr>
+					<tr>
+						<td><%= @person["slack"] %></td>
+						<td><%= @person["github"] %></td>
+					</tr>
+				</table>
+			</div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
