@@ -10,6 +10,9 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Employee < ActiveRecord::Base
+  validates :name, presence: true
+  validates :position, inclusion: { in: %w{Instructor Student}, message: "%{value} must be Instructor or Student" }
+
   self.primary_key = "id"
 end
 
@@ -27,29 +30,34 @@ get '/employees' do
   erb :employees
 end
 
-get '/employee_page' do
+get '/employee_show' do
   @employee = Employee.find(params["id"])
   if @employee
-    erb :employee_page
+    erb :employee_show
   else
     erb :no_employee_found
   end
 end
 
 get '/new' do
+  @employee = Employee.new
+
   erb :new
 end
 
 get '/new_employees' do
-  Employee.create(params)
-
-  redirect('/')
+  @employee = Employee.create(params)
+  if @employee.valid?
+    redirect('/')
+  else
+    erb :new_employees
+  end
 end
 
 get '/search' do
   search = params["search"]
 
-  @employees = Employee.where("name like $1 or github = $2 or slack = $2", "%#{search}%", search)
+  @employees = Employee.where("name like ? or github = ? or slack = ?", "%#{search}%", search, search)
 
   erb :search
 end
@@ -68,7 +76,11 @@ get '/update' do
   @employee = Employee.find(params["id"])
   @employee.update_attributes(params)
 
-  erb :employee_page
+  if @employee.valid?
+    redirect to("/employee_show?id=#{@employee.id}")
+  else
+    erb :edit
+  end
 end
 
 get '/delete' do

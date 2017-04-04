@@ -66,7 +66,7 @@
             <% @employees.each do |employee| %>
             <tr>
               <td><%= employee.id %></td>
-              <td><a href="/employee_page?id=<%= employee.id %>"><%= employee.name %></td>
+              <td><a href="/employee_show?id=<%= employee.id %>"><%= employee.name %></td>
               <td><%= employee.phone %></td>
               <td><%= employee.address %></td>
               <td><%= employee.position %></td>

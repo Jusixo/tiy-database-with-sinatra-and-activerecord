@@ -45,24 +45,24 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
-      <div class="panel panel-success">
+      <div class="panel panel-title">
         <div class="panel-heading">Employees. Click to see an individual employee</div>
         <table class="table table-striped">
           <thead>
             <th>#</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Position</th>
-            <th>Salary</th>
-            <th>Github account</th>
-            <th>Slack account</th>
+            <th>name</th>
+            <th>phone</th>
+            <th>address</th>
+            <th>position</th>
+            <th>salary</th>
+            <th>github account</th>
+            <th>slack account</th>
           </thead>
           <tbody>
             <% @employees.each do |employee| %>
             <tr>
               <td><%= employee.id %></td>
-              <td><a href="/employee_page?id=<%= employee.id %>"><%= employee.name %></td>
+              <td><a href="/employee_show?id=<%= employee.id %>"><%= employee.name %></td>
               <td><%= employee.phone %></td>
               <td><%= employee.address %></td>
               <td><%= employee.position %></td>
