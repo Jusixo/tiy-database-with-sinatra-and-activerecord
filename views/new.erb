@@ -16,7 +16,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head> 
+  </head>
   <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -45,7 +45,8 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
-      <form action="/new_employees" method="get" class="form-horizontal">
+      <%= @employee.errors.full_messages.join(" and") %>
+      <form action="/new" method="get" class="form-horizontal">
         <div class="form-group">
           <label for="exampleInputEmail1">Name</label>
           <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Name">

@@ -11,6 +11,8 @@ ActiveRecord::Base.establish_connection(
 
 class Employee < ActiveRecord::Base
   validates :name, presence: true
+  validates :salary, presence: true
+  validates :github, length: { minimum: 5 }
   validates :position, inclusion: { in: %w{Instructor Student}, message: "%{value} must be Instructor or Student" }
 
   self.primary_key = "id"
@@ -39,18 +41,18 @@ get '/employee_show' do
   end
 end
 
-get '/new' do
+get '/new_employees' do
   @employee = Employee.new
 
   erb :new
 end
 
-get '/new_employees' do
+get '/new' do
   @employee = Employee.create(params)
   if @employee.valid?
     redirect('/')
   else
-    erb :new_employees
+    erb :new
   end
 end
 
@@ -79,7 +81,7 @@ get '/update' do
   if @employee.valid?
     redirect to("/employee_show?id=#{@employee.id}")
   else
-    erb :edit
+    erb :edit_employee
   end
 end
 
